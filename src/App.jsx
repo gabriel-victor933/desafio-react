@@ -33,20 +33,36 @@ function App() {
     myRef.current.appendChild(createElement(circle.pageX,circle.pageY,circle.id))
   }
 
+  function resetCircles(e){
+    e.stopPropagation()
+    setActiveCircles([])
+    setDeactiveCircles([])
+    activeCircles.forEach((circle) => {
+      const child = document.getElementById(`${circle.id}`)
+      myRef.current.removeChild(child)
+    })
+  }
+
   function createElement(pageX,pageY,id){
     const p = document.createElement("p")
     p.style.width = `${CIRCLESIZE}px`
     p.style.height = `${CIRCLESIZE}px`
     p.style.left = `${pageX - CIRCLESIZE/2}px`
     p.style.top = `${pageY - CIRCLESIZE/2}px`
+    p.style.backgroundColor = `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`
     p.setAttribute("id",`${id}`)
     return p
+  }
+
+  function randomNumber(){
+    return Math.round(Math.random()*256);
   }
 
   return (
     <div className='main' onClick={addCircle} ref={myRef}>
       <button onClick={removeCircle}>Remover</button>
       <button onClick={insertCircle}>Voltar</button>
+      <button onClick={resetCircles}>Reset</button>
     </div>
   )
 }
