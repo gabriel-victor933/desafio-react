@@ -10,7 +10,21 @@ body, #root, .main {
 
 .main {
   background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  
 }
 
+p {
+  border-radius: 50%;
+  background-color: red;
+  position: fixed;
+}
 
+button {
+  width: 100px;
+  height: 30px;
+  margin: 50px 5px;
+}
 

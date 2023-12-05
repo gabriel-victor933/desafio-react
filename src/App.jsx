@@ -1,23 +1,52 @@
-import { useRef } from 'react'
-import "./app.css"
+import { useRef, useState } from 'react'
 
 function App() {
   const myRef = useRef(null) 
+  const [activeCircles,setActiveCircles] = useState([])
+  const [deactivateCircles,setDeactiveCircles] = useState([])
+  let CIRCLESIZE = 40;
 
-  const CIRCLESIZE = 40;
 
-  function handleClick(e){
+  function addCircle(e){
     const {pageX,pageY} = e
+    const newCircle = {id: Date.now(), pageX, pageY};
+    setActiveCircles([...activeCircles,newCircle])
+    myRef.current.appendChild(createElement(pageX,pageY,newCircle.id))
+  }
+
+  function removeCircle(e){
+    e.stopPropagation()
+    const circle = activeCircles.pop()
+    if(!circle) return
+    setActiveCircles([...activeCircles])
+    setDeactiveCircles([...deactivateCircles,circle])
+    const child = document.getElementById(`${circle.id}`)
+    myRef.current.removeChild(child)
+  }
+
+  function insertCircle(e){
+    e.stopPropagation()
+    const circle = deactivateCircles.pop()
+    if(!circle) return
+    setActiveCircles([...activeCircles,circle])
+    setDeactiveCircles([...deactivateCircles])
+    myRef.current.appendChild(createElement(circle.pageX,circle.pageY,circle.id))
+  }
+
+  function createElement(pageX,pageY,id){
     const p = document.createElement("p")
-    p.style.width = `${CIRCLESIZE}`
-    p.style.height = `${CIRCLESIZE}`
-    p.style.left = `${pageX - CIRCLESIZE}px`
-    p.style.top = `${pageY - CIRCLESIZE}px`
-    myRef.current.appendChild(p)
+    p.style.width = `${CIRCLESIZE}px`
+    p.style.height = `${CIRCLESIZE}px`
+    p.style.left = `${pageX - CIRCLESIZE/2}px`
+    p.style.top = `${pageY - CIRCLESIZE/2}px`
+    p.setAttribute("id",`${id}`)
+    return p
   }
 
   return (
-    <div className='main' onClick={handleClick} ref={myRef}>
+    <div className='main' onClick={addCircle} ref={myRef}>
+      <button onClick={removeCircle}>Remover</button>
+      <button onClick={insertCircle}>Voltar</button>
     </div>
   )
 }
