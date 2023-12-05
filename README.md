@@ -1,8 +1,13 @@
-# React + Vite
+## Descrição 
+Construa uma aplicação web usando react, que a cada clique na tela seja inserido um círculo na posição exata do clique, construa também um botão de desfazer que irá sumir com o último círculo adicionado, e um botão de refazer que irá adicionar novamente à tela.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+## Deploy 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<a href="https://desafio-react-tawny.vercel.app/">Clique aqui para acessar!</a>
+
+## Como rodar localmente?
+
+- Baixe o repositório do projeto;
+- Execute o comando `npm i` na raiz do projeto;
+- Execute o comando `npm run dev` para executar o projeto em desenvolvimento.

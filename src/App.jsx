@@ -9,9 +9,9 @@ function App() {
 
   function addCircle(e){
     const {pageX,pageY} = e
-    const newCircle = {id: Date.now(), pageX, pageY};
+    const newCircle = {id: Date.now(), pageX, pageY, rgb: `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`};
     setActiveCircles([...activeCircles,newCircle])
-    myRef.current.appendChild(createElement(pageX,pageY,newCircle.id))
+    myRef.current.appendChild(createElement(pageX,pageY,newCircle.id,newCircle.rgb))
   }
 
   function removeCircle(e){
@@ -30,7 +30,7 @@ function App() {
     if(!circle) return
     setActiveCircles([...activeCircles,circle])
     setDeactiveCircles([...deactivateCircles])
-    myRef.current.appendChild(createElement(circle.pageX,circle.pageY,circle.id))
+    myRef.current.appendChild(createElement(circle.pageX,circle.pageY,circle.id,circle.rgb))
   }
 
   function resetCircles(e){
@@ -43,13 +43,13 @@ function App() {
     })
   }
 
-  function createElement(pageX,pageY,id){
+  function createElement(pageX,pageY,id,rgb){
     const p = document.createElement("p")
     p.style.width = `${CIRCLESIZE}px`
     p.style.height = `${CIRCLESIZE}px`
     p.style.left = `${pageX - CIRCLESIZE/2}px`
     p.style.top = `${pageY - CIRCLESIZE/2}px`
-    p.style.backgroundColor = `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`
+    p.style.backgroundColor = rgb
     p.setAttribute("id",`${id}`)
     return p
   }
